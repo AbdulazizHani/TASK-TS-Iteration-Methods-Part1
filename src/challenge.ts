@@ -1,5 +1,7 @@
 // 🌶️🌶️🌶️ Extra
 
+import { isTemplateLiteralToken } from "typescript";
+
 // `logger` function that:
 // - Accepts "array" parameter which holds elements of the same type
 // - log every element in an array
@@ -8,7 +10,7 @@
 // logger<number>([1, 2, 3]);
 // logger<number | string>([1, 2, 3, "one", "two", "three"]);
 function logger<T>(array: T[]): void {
-  // write your code here...
+  array.forEach((element) => console.log(element));
 }
 
 // `toCelsius` function that:
@@ -18,9 +20,7 @@ function logger<T>(array: T[]): void {
 // example:
 // toCelsius([32, 68, 100, 212]); // => [0, 20, 37.7778, 100]
 function toCelsius(temperatures: number[]): number[] {
-  // write your code here...
-
-  return []; // replace empty array with what you see is fit
+  return temperatures.map((f) => (f - 32) * (5 / 9));
 }
 
 // `hottestDays` function that:
@@ -33,7 +33,7 @@ function toCelsius(temperatures: number[]): number[] {
 function hottestDays(temperatures: number[], threshold: number): number[] {
   // write your code here...
 
-  return []; // replace empty array with what you see is fit
+  return temperatures.filter((temp) => temp > threshold);
 }
 
 // `logHottestDays` function that:
@@ -41,7 +41,9 @@ function hottestDays(temperatures: number[], threshold: number): number[] {
 // - Accepts "threshold" parameter of type "number"
 // - Log temperatures that exceed the threshold to the console IN DEGREES CELSIUS  (hint: you can combine all previous functions)
 function logHottestDays(temperatures: number[], threshold: number): void {
-  // write your code here...
+  const hotTemps = hottestDays(temperatures, threshold);
+  const hotTempsInCelsius = toCelsius(hotTemps);
+  logger(hotTempsInCelsius);
 }
 
 export { logger, toCelsius, hottestDays, logHottestDays };
